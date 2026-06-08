@@ -40,11 +40,32 @@ function App() {
         </button>
       </div>
 
-      <TrainingTable
-        records={records}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-      />
+      <div className="main-layout">
+        <div className="main-left">
+          <TrainingTable
+            records={records}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
+        </div>
+
+        {records.length > 0 && (
+          <div className="main-right">
+            <div className="json-panel">
+              <div className="json-panel-header">
+                <span>Submitted JSON Data</span>
+                <button
+                  className="copy-json-btn"
+                  onClick={() => navigator.clipboard.writeText(JSON.stringify(records, null, 2))}
+                >
+                  Copy
+                </button>
+              </div>
+              <pre>{JSON.stringify(records, null, 2)}</pre>
+            </div>
+          </div>
+        )}
+      </div>
 
       {showForm && (
         <div className="overlay" onClick={handleClose}>
@@ -80,7 +101,7 @@ style.textContent = `
     min-height: 100vh;
   }
   .app {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
   }
@@ -108,6 +129,59 @@ style.textContent = `
   }
   .add-btn:hover {
     background: #4f46e5;
+  }
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main-left {
+    min-width: 0;
+  }
+  .main-right {
+    position: sticky;
+    top: 1.5rem;
+  }
+  .json-panel {
+    background: #1a1a2e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  .json-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #2d2d44;
+    font-size: 13px;
+    font-weight: 600;
+    color: #a5b4fc;
+  }
+  .copy-json-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-json-btn:hover {
+    background: #4f46e5;
+  }
+  .json-panel pre {
+    color: #a5f3fc;
+    padding: 16px;
+    font-size: 11px;
+    overflow-x: auto;
+    margin: 0;
+    line-height: 1.7;
+    max-height: 600px;
+    overflow-y: auto;
   }
   .overlay {
     position: fixed;
@@ -155,6 +229,14 @@ style.textContent = `
   }
   .close-btn:hover {
     color: #1a1a2e;
+  }
+  @media (max-width: 900px) {
+    .main-layout {
+      grid-template-columns: 1fr;
+    }
+    .main-right {
+      position: static;
+    }
   }
 `
 document.head.appendChild(style)

@@ -15,12 +15,10 @@ function TrainingForm({ onSubmit, initialData }) {
   const [form, setForm] = useState(initialData || initialState)
   const [errors, setErrors] = useState({})
   const [toast, setToast] = useState(false)
-  const [lastRecord, setLastRecord] = useState(null)
 
   useEffect(() => {
     setForm(initialData || initialState)
     setErrors({})
-    setLastRecord(null)
   }, [initialData])
 
   function handleChange(e) {
@@ -74,9 +72,7 @@ function TrainingForm({ onSubmit, initialData }) {
       setErrors(newErrors)
       return
     }
-    const record = { ...form, submittedAt: new Date().toISOString() }
-    onSubmit(record)
-    setLastRecord(record)
+    onSubmit({ ...form, submittedAt: new Date().toISOString() })
     setForm(initialState)
     setErrors({})
     setToast(true)
@@ -207,21 +203,6 @@ function TrainingForm({ onSubmit, initialData }) {
           {initialData ? 'Update Record' : 'Submit Record'}
         </button>
       </form>
-
-      {lastRecord && toast && (
-        <div className="json-preview">
-          <div className="json-preview-header">
-            <span>Submitted JSON</span>
-            <button
-              className="copy-json-btn"
-              onClick={() => navigator.clipboard.writeText(JSON.stringify(lastRecord, null, 2))}
-            >
-              Copy
-            </button>
-          </div>
-          <pre>{JSON.stringify(lastRecord, null, 2)}</pre>
-        </div>
-      )}
     </div>
   )
 }
@@ -350,44 +331,6 @@ style.textContent = `
   }
   .submit-btn:hover {
     background: #4f46e5;
-  }
-  .json-preview {
-    margin-top: 1.5rem;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #e0e7ff;
-  }
-  .json-preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    background: #eef2ff;
-    font-size: 12px;
-    font-weight: 600;
-    color: #4f46e5;
-  }
-  .copy-json-btn {
-    background: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 3px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .copy-json-btn:hover {
-    background: #4f46e5;
-  }
-  .json-preview pre {
-    background: #1a1a2e;
-    color: #a5f3fc;
-    padding: 12px;
-    font-size: 11px;
-    overflow-x: auto;
-    margin: 0;
-    line-height: 1.6;
   }
 `
 document.head.appendChild(style)
