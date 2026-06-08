@@ -18,7 +18,7 @@ Error generating stack: `+e.message+`
   .badge-completed { background: #d1fae5; color: #065f46; }
   .badge-inprogress { background: #fef3c7; color: #92400e; }
   .badge-pending { background: #fee2e2; color: #991b1b; }
-`,document.head.appendChild(h);var g={employeeName:``,employeeId:``,moduleName:``,status:``,certificateUpload:``,issueDate:``,expiryDate:``};function _({onSubmit:e,initialData:t}){let[n,r]=(0,d.useState)(t||g),[i,a]=(0,d.useState)({}),[o,s]=(0,d.useState)(!1),[c,l]=(0,d.useState)(null);(0,d.useEffect)(()=>{r(t||g),a({}),l(null)},[t]);function u(e){let{name:t,value:n}=e.target;r(e=>({...e,[t]:n})),a(e=>({...e,[t]:``}))}function f(e){let t=e.target.files[0];t&&(r(e=>({...e,certificateUpload:t.name})),a(e=>({...e,certificateUpload:``})))}function h(e){r(t=>({...t,status:e,expiryDate:e===`Completed`?t.expiryDate:``,certificateUpload:e===`Completed`?t.certificateUpload:``})),a(e=>({...e,status:``,expiryDate:``,certificateUpload:``}))}function _(){let e={},t=new Date().toISOString().split(`T`)[0];return n.employeeName.trim()||(e.employeeName=`Required`),n.employeeId.trim()?/^EMP-\d+$/i.test(n.employeeId.trim())||(e.employeeId=`Format: EMP-123`):e.employeeId=`Required`,n.moduleName.trim()||(e.moduleName=`Required`),n.status||(e.status=`Select a status`),n.issueDate?n.issueDate>t&&(e.issueDate=`Cannot be a future date`):e.issueDate=`Required`,n.status===`Completed`&&(n.certificateUpload||(e.certificateUpload=`Certificate is required when completed`),n.expiryDate?n.expiryDate>t&&(e.expiryDate=`Cannot be a future date`):e.expiryDate=`Required when completed`,n.issueDate&&n.expiryDate&&n.expiryDate<=n.issueDate&&(e.expiryDate=`Must be after issue date`)),e}function v(t){t.preventDefault();let i=_();if(Object.keys(i).length>0){a(i);return}let o={...n,submittedAt:new Date().toISOString()};e(o),l(o),r(g),a({}),s(!0),setTimeout(()=>s(!1),3e3)}let y=n.status===`Completed`;return(0,p.jsxs)(`div`,{className:`form-card`,children:[o&&(0,p.jsx)(`div`,{className:`toast`,children:`✅ Record submitted successfully!`}),(0,p.jsxs)(`form`,{onSubmit:v,children:[(0,p.jsxs)(`div`,{className:`form-row`,children:[(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Employee Name`}),(0,p.jsx)(`input`,{name:`employeeName`,value:n.employeeName,onChange:u,placeholder:`e.g. John Doe`}),i.employeeName&&(0,p.jsx)(`span`,{className:`err`,children:i.employeeName})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Employee ID`}),(0,p.jsx)(`input`,{name:`employeeId`,value:n.employeeId,onChange:u,placeholder:`e.g. EMP-402`}),i.employeeId&&(0,p.jsx)(`span`,{className:`err`,children:i.employeeId})]})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Training Module Name`}),(0,p.jsx)(`input`,{name:`moduleName`,value:n.moduleName,onChange:u,placeholder:`e.g. Data Privacy Compliance`}),i.moduleName&&(0,p.jsx)(`span`,{className:`err`,children:i.moduleName})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Status`}),(0,p.jsx)(`div`,{className:`status-buttons`,children:[`Completed`,`In-Progress`,`Pending`].map(e=>(0,p.jsx)(`button`,{type:`button`,className:`status-btn ${n.status===e?`active-`+e.toLowerCase().replace(`-`,``):``}`,onClick:()=>h(e),children:n.status===e?(0,p.jsx)(m,{status:e}):e},e))}),i.status&&(0,p.jsx)(`span`,{className:`err`,children:i.status})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Certificate Upload`,y&&(0,p.jsx)(`span`,{className:`required-star`,children:` *`})]}),(0,p.jsxs)(`div`,{className:`cert-row`,children:[(0,p.jsx)(`input`,{name:`certificateUpload`,value:n.certificateUpload,onChange:u,placeholder:y?`e.g. john_doe_privacy.pdf`:`Only available when Completed`,className:`cert-input`,disabled:!y}),(0,p.jsxs)(`label`,{className:y?`file-btn`:`file-btn file-btn-disabled`,children:[`Browse`,(0,p.jsx)(`input`,{type:`file`,accept:`.pdf,.doc,.docx,.png,.jpg,.jpeg`,onChange:f,disabled:!y,style:{display:`none`}})]})]}),i.certificateUpload&&(0,p.jsx)(`span`,{className:`err`,children:i.certificateUpload})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Issue Date `,(0,p.jsx)(`span`,{className:`required-star`,children:`*`})]}),(0,p.jsx)(`input`,{type:`date`,name:`issueDate`,value:n.issueDate,onChange:u,max:new Date().toISOString().split(`T`)[0]}),i.issueDate&&(0,p.jsx)(`span`,{className:`err`,children:i.issueDate})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Expiry Date`,y&&(0,p.jsx)(`span`,{className:`required-star`,children:` *`})]}),(0,p.jsx)(`input`,{type:`date`,name:`expiryDate`,value:n.expiryDate,onChange:u,disabled:!y,max:new Date().toISOString().split(`T`)[0],className:y?``:`input-disabled`}),i.expiryDate&&(0,p.jsx)(`span`,{className:`err`,children:i.expiryDate})]}),(0,p.jsx)(`button`,{type:`submit`,className:`submit-btn`,children:t?`Update Record`:`Submit Record`})]}),c&&o&&(0,p.jsxs)(`div`,{className:`json-preview`,children:[(0,p.jsxs)(`div`,{className:`json-preview-header`,children:[(0,p.jsx)(`span`,{children:`Submitted JSON`}),(0,p.jsx)(`button`,{className:`copy-json-btn`,onClick:()=>navigator.clipboard.writeText(JSON.stringify(c,null,2)),children:`Copy`})]}),(0,p.jsx)(`pre`,{children:JSON.stringify(c,null,2)})]})]})}var v=document.createElement(`style`);v.textContent=`
+`,document.head.appendChild(h);var g={employeeName:``,employeeId:``,moduleName:``,status:``,certificateUpload:``,issueDate:``,expiryDate:``};function _({onSubmit:e,initialData:t}){let[n,r]=(0,d.useState)(t||g),[i,a]=(0,d.useState)({}),[o,s]=(0,d.useState)(!1);(0,d.useEffect)(()=>{r(t||g),a({})},[t]);function c(e){let{name:t,value:n}=e.target;r(e=>({...e,[t]:n})),a(e=>({...e,[t]:``}))}function l(e){let t=e.target.files[0];t&&(r(e=>({...e,certificateUpload:t.name})),a(e=>({...e,certificateUpload:``})))}function u(e){r(t=>({...t,status:e,expiryDate:e===`Completed`?t.expiryDate:``,certificateUpload:e===`Completed`?t.certificateUpload:``})),a(e=>({...e,status:``,expiryDate:``,certificateUpload:``}))}function f(){let e={},t=new Date().toISOString().split(`T`)[0];return n.employeeName.trim()||(e.employeeName=`Required`),n.employeeId.trim()?/^EMP-\d+$/i.test(n.employeeId.trim())||(e.employeeId=`Format: EMP-123`):e.employeeId=`Required`,n.moduleName.trim()||(e.moduleName=`Required`),n.status||(e.status=`Select a status`),n.issueDate?n.issueDate>t&&(e.issueDate=`Cannot be a future date`):e.issueDate=`Required`,n.status===`Completed`&&(n.certificateUpload||(e.certificateUpload=`Certificate is required when completed`),n.expiryDate?n.expiryDate>t&&(e.expiryDate=`Cannot be a future date`):e.expiryDate=`Required when completed`,n.issueDate&&n.expiryDate&&n.expiryDate<=n.issueDate&&(e.expiryDate=`Must be after issue date`)),e}function h(t){t.preventDefault();let i=f();if(Object.keys(i).length>0){a(i);return}e({...n,submittedAt:new Date().toISOString()}),r(g),a({}),s(!0),setTimeout(()=>s(!1),3e3)}let _=n.status===`Completed`;return(0,p.jsxs)(`div`,{className:`form-card`,children:[o&&(0,p.jsx)(`div`,{className:`toast`,children:`✅ Record submitted successfully!`}),(0,p.jsxs)(`form`,{onSubmit:h,children:[(0,p.jsxs)(`div`,{className:`form-row`,children:[(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Employee Name`}),(0,p.jsx)(`input`,{name:`employeeName`,value:n.employeeName,onChange:c,placeholder:`e.g. John Doe`}),i.employeeName&&(0,p.jsx)(`span`,{className:`err`,children:i.employeeName})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Employee ID`}),(0,p.jsx)(`input`,{name:`employeeId`,value:n.employeeId,onChange:c,placeholder:`e.g. EMP-402`}),i.employeeId&&(0,p.jsx)(`span`,{className:`err`,children:i.employeeId})]})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Training Module Name`}),(0,p.jsx)(`input`,{name:`moduleName`,value:n.moduleName,onChange:c,placeholder:`e.g. Data Privacy Compliance`}),i.moduleName&&(0,p.jsx)(`span`,{className:`err`,children:i.moduleName})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsx)(`label`,{children:`Status`}),(0,p.jsx)(`div`,{className:`status-buttons`,children:[`Completed`,`In-Progress`,`Pending`].map(e=>(0,p.jsx)(`button`,{type:`button`,className:`status-btn ${n.status===e?`active-`+e.toLowerCase().replace(`-`,``):``}`,onClick:()=>u(e),children:n.status===e?(0,p.jsx)(m,{status:e}):e},e))}),i.status&&(0,p.jsx)(`span`,{className:`err`,children:i.status})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Certificate Upload`,_&&(0,p.jsx)(`span`,{className:`required-star`,children:` *`})]}),(0,p.jsxs)(`div`,{className:`cert-row`,children:[(0,p.jsx)(`input`,{name:`certificateUpload`,value:n.certificateUpload,onChange:c,placeholder:_?`e.g. john_doe_privacy.pdf`:`Only available when Completed`,className:`cert-input`,disabled:!_}),(0,p.jsxs)(`label`,{className:_?`file-btn`:`file-btn file-btn-disabled`,children:[`Browse`,(0,p.jsx)(`input`,{type:`file`,accept:`.pdf,.doc,.docx,.png,.jpg,.jpeg`,onChange:l,disabled:!_,style:{display:`none`}})]})]}),i.certificateUpload&&(0,p.jsx)(`span`,{className:`err`,children:i.certificateUpload})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Issue Date `,(0,p.jsx)(`span`,{className:`required-star`,children:`*`})]}),(0,p.jsx)(`input`,{type:`date`,name:`issueDate`,value:n.issueDate,onChange:c,max:new Date().toISOString().split(`T`)[0]}),i.issueDate&&(0,p.jsx)(`span`,{className:`err`,children:i.issueDate})]}),(0,p.jsxs)(`div`,{className:`form-field`,children:[(0,p.jsxs)(`label`,{children:[`Expiry Date`,_&&(0,p.jsx)(`span`,{className:`required-star`,children:` *`})]}),(0,p.jsx)(`input`,{type:`date`,name:`expiryDate`,value:n.expiryDate,onChange:c,disabled:!_,max:new Date().toISOString().split(`T`)[0],className:_?``:`input-disabled`}),i.expiryDate&&(0,p.jsx)(`span`,{className:`err`,children:i.expiryDate})]}),(0,p.jsx)(`button`,{type:`submit`,className:`submit-btn`,children:t?`Update Record`:`Submit Record`})]})]})}var v=document.createElement(`style`);v.textContent=`
   .form-card {
     background: transparent;
     padding: 0;
@@ -139,44 +139,6 @@ Error generating stack: `+e.message+`
   }
   .submit-btn:hover {
     background: #4f46e5;
-  }
-  .json-preview {
-    margin-top: 1.5rem;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #e0e7ff;
-  }
-  .json-preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    background: #eef2ff;
-    font-size: 12px;
-    font-weight: 600;
-    color: #4f46e5;
-  }
-  .copy-json-btn {
-    background: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 3px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .copy-json-btn:hover {
-    background: #4f46e5;
-  }
-  .json-preview pre {
-    background: #1a1a2e;
-    color: #a5f3fc;
-    padding: 12px;
-    font-size: 11px;
-    overflow-x: auto;
-    margin: 0;
-    line-height: 1.6;
   }
 `,document.head.appendChild(v);function y({records:e,onDelete:t,onEdit:n}){let[r,i]=(0,d.useState)(``),[a,o]=(0,d.useState)(`All`),s=e.filter(e=>{let t=e.employeeName.toLowerCase().includes(r.toLowerCase())||e.employeeId.toLowerCase().includes(r.toLowerCase())||e.moduleName.toLowerCase().includes(r.toLowerCase()),n=a===`All`||e.status===a;return t&&n});return e.length===0?(0,p.jsxs)(`div`,{className:`table-empty`,children:[(0,p.jsx)(`div`,{className:`empty-icon`,children:`📋`}),(0,p.jsx)(`p`,{children:`No records yet.`}),(0,p.jsx)(`span`,{children:`Click "Add Record" to get started.`})]}):(0,p.jsxs)(`div`,{className:`table-section`,children:[(0,p.jsxs)(`div`,{className:`table-top`,children:[(0,p.jsx)(`h2`,{children:`Training Records`}),(0,p.jsxs)(`span`,{className:`record-count`,children:[e.length,` `,e.length===1?`record`:`records`]})]}),(0,p.jsxs)(`div`,{className:`filter-row`,children:[(0,p.jsx)(`input`,{className:`search-input`,placeholder:`Search by name, ID or module...`,value:r,onChange:e=>i(e.target.value)}),(0,p.jsx)(`div`,{className:`filter-buttons`,children:[`All`,`Completed`,`In-Progress`,`Pending`].map(e=>(0,p.jsx)(`button`,{className:`filter-btn ${a===e?`filter-btn-active`:``}`,onClick:()=>o(e),children:e},e))})]}),s.length===0?(0,p.jsx)(`div`,{className:`no-results`,children:`No records match your search.`}):(0,p.jsx)(`div`,{className:`table-wrapper`,children:(0,p.jsxs)(`table`,{children:[(0,p.jsx)(`thead`,{children:(0,p.jsxs)(`tr`,{children:[(0,p.jsx)(`th`,{children:`Employee Name`}),(0,p.jsx)(`th`,{children:`Employee ID`}),(0,p.jsx)(`th`,{children:`Training Module`}),(0,p.jsx)(`th`,{children:`Status`}),(0,p.jsx)(`th`,{children:`Certificate`}),(0,p.jsx)(`th`,{children:`Issue Date`}),(0,p.jsx)(`th`,{children:`Expiry Date`}),(0,p.jsx)(`th`,{children:`Actions`})]})}),(0,p.jsx)(`tbody`,{children:s.map((r,i)=>(0,p.jsxs)(`tr`,{className:`table-row`,children:[(0,p.jsx)(`td`,{children:r.employeeName}),(0,p.jsx)(`td`,{children:r.employeeId}),(0,p.jsx)(`td`,{children:r.moduleName}),(0,p.jsx)(`td`,{children:(0,p.jsx)(m,{status:r.status})}),(0,p.jsx)(`td`,{children:r.certificateUpload||`-`}),(0,p.jsx)(`td`,{children:r.issueDate||`-`}),(0,p.jsx)(`td`,{children:r.expiryDate||`-`}),(0,p.jsx)(`td`,{children:(0,p.jsxs)(`div`,{className:`action-btns`,children:[(0,p.jsx)(`button`,{className:`edit-btn`,onClick:()=>n(e.indexOf(r)),children:`Edit`}),(0,p.jsx)(`button`,{className:`delete-btn`,onClick:()=>t(e.indexOf(r)),children:`Delete`})]})})]},i))})]})})]})}var b=document.createElement(`style`);b.textContent=`
   .table-empty {
@@ -349,7 +311,7 @@ Error generating stack: `+e.message+`
   .delete-btn:hover {
     background: #fca5a5;
   }
-`,document.head.appendChild(b);function x(){let[e,t]=(0,d.useState)([]),[n,r]=(0,d.useState)(!1),[i,a]=(0,d.useState)(null);function o(e){i===null?t(t=>[...t,e]):(t(t=>t.map((t,n)=>n===i?e:t)),a(null)),r(!1)}function s(e){t(t=>t.filter((t,n)=>n!==e))}function c(e){a(e),r(!0)}function l(){r(!1),a(null)}return(0,p.jsxs)(`div`,{className:`app`,children:[(0,p.jsxs)(`div`,{className:`app-header`,children:[(0,p.jsx)(`h1`,{children:`Employee Training Tracker`}),(0,p.jsx)(`button`,{className:`add-btn`,onClick:()=>r(!0),children:`+ Add Record`})]}),(0,p.jsx)(y,{records:e,onDelete:s,onEdit:c}),n&&(0,p.jsx)(`div`,{className:`overlay`,onClick:l,children:(0,p.jsxs)(`div`,{className:`slidein-panel`,onClick:e=>e.stopPropagation(),children:[(0,p.jsxs)(`div`,{className:`slidein-header`,children:[(0,p.jsx)(`h2`,{children:i===null?`Add Training Record`:`Edit Record`}),(0,p.jsx)(`button`,{className:`close-btn`,onClick:l,children:`✕`})]}),(0,p.jsx)(_,{onSubmit:o,initialData:i===null?null:e[i]})]})})]})}var ee=document.createElement(`style`);ee.textContent=`
+`,document.head.appendChild(b);function x(){let[e,t]=(0,d.useState)([]),[n,r]=(0,d.useState)(!1),[i,a]=(0,d.useState)(null);function o(e){i===null?t(t=>[...t,e]):(t(t=>t.map((t,n)=>n===i?e:t)),a(null)),r(!1)}function s(e){t(t=>t.filter((t,n)=>n!==e))}function c(e){a(e),r(!0)}function l(){r(!1),a(null)}return(0,p.jsxs)(`div`,{className:`app`,children:[(0,p.jsxs)(`div`,{className:`app-header`,children:[(0,p.jsx)(`h1`,{children:`Employee Training Tracker`}),(0,p.jsx)(`button`,{className:`add-btn`,onClick:()=>r(!0),children:`+ Add Record`})]}),(0,p.jsxs)(`div`,{className:`main-layout`,children:[(0,p.jsx)(`div`,{className:`main-left`,children:(0,p.jsx)(y,{records:e,onDelete:s,onEdit:c})}),e.length>0&&(0,p.jsx)(`div`,{className:`main-right`,children:(0,p.jsxs)(`div`,{className:`json-panel`,children:[(0,p.jsxs)(`div`,{className:`json-panel-header`,children:[(0,p.jsx)(`span`,{children:`Submitted JSON Data`}),(0,p.jsx)(`button`,{className:`copy-json-btn`,onClick:()=>navigator.clipboard.writeText(JSON.stringify(e,null,2)),children:`Copy`})]}),(0,p.jsx)(`pre`,{children:JSON.stringify(e,null,2)})]})})]}),n&&(0,p.jsx)(`div`,{className:`overlay`,onClick:l,children:(0,p.jsxs)(`div`,{className:`slidein-panel`,onClick:e=>e.stopPropagation(),children:[(0,p.jsxs)(`div`,{className:`slidein-header`,children:[(0,p.jsx)(`h2`,{children:i===null?`Add Training Record`:`Edit Record`}),(0,p.jsx)(`button`,{className:`close-btn`,onClick:l,children:`✕`})]}),(0,p.jsx)(_,{onSubmit:o,initialData:i===null?null:e[i]})]})})]})}var ee=document.createElement(`style`);ee.textContent=`
   * {
     box-sizing: border-box;
     margin: 0;
@@ -362,7 +324,7 @@ Error generating stack: `+e.message+`
     min-height: 100vh;
   }
   .app {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
   }
@@ -390,6 +352,59 @@ Error generating stack: `+e.message+`
   }
   .add-btn:hover {
     background: #4f46e5;
+  }
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main-left {
+    min-width: 0;
+  }
+  .main-right {
+    position: sticky;
+    top: 1.5rem;
+  }
+  .json-panel {
+    background: #1a1a2e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  .json-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #2d2d44;
+    font-size: 13px;
+    font-weight: 600;
+    color: #a5b4fc;
+  }
+  .copy-json-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-json-btn:hover {
+    background: #4f46e5;
+  }
+  .json-panel pre {
+    color: #a5f3fc;
+    padding: 16px;
+    font-size: 11px;
+    overflow-x: auto;
+    margin: 0;
+    line-height: 1.7;
+    max-height: 600px;
+    overflow-y: auto;
   }
   .overlay {
     position: fixed;
@@ -437,5 +452,13 @@ Error generating stack: `+e.message+`
   }
   .close-btn:hover {
     color: #1a1a2e;
+  }
+  @media (max-width: 900px) {
+    .main-layout {
+      grid-template-columns: 1fr;
+    }
+    .main-right {
+      position: static;
+    }
   }
 `,document.head.appendChild(ee),(0,f.createRoot)(document.getElementById(`root`)).render((0,p.jsx)(d.StrictMode,{children:(0,p.jsx)(x,{})}));
